@@ -32,8 +32,10 @@
     </style>
   </head>
   <body>
-    <a id="rescue" href="../">RESCUE ME!</a> 
-           
+    <form method="POST">  {% csrf_token %}
+      <button type="submit" name="rescue_me" value="Rescue&Me">&nbsp;Rescue Me!</button>
+      <button type="submit" name="rescue_other" value="Rescue Friend/Family">&nbsp;Rescue Friend/Family</button>
+    </form>
             
             
     <div id="map"></div>

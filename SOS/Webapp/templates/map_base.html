@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 600px;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 10px;
+        padding: 0;
+        background: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="panel" style="color: white; border: 10px solid black;">Choose your location</div>
+    <div id="map"></div>
+     {% block  mapscript %}
+
+
+    {% endblock  %}
+
+  </body>
+</html>
