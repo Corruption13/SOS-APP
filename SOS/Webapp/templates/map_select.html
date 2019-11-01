@@ -1,35 +1,146 @@
+
+
+
 {% extends 'map_base.html' %}
 
 
 {% block mapscript %}
+
+<div class="container " >
+  <h2>{% block id %}{% endblock %} Please Provide details</h2>
+
+  <form id="data" method="POST"> {% csrf_token %}
+      <table class="table" id= "create">
+        <thead>
+          <tr>
+            <th><h3>Victim Data Collection</h3>
+            <br>Name</th>
+
+
+
+            <th>Mobile Number<th>
+
+
+
+            
+
+          </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td><input id="name" name="name" type="text" class="form-control" required/></td>
+
+
+            
+            <td style="width: 20%;"><input name="number" id="number" type="tel" class="form-control" required/></td>
+            
+        </tr>
+    
+
+          </tbody>
+      </table>
+
+	  <table class="table" id= "address">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Latitude</th>
+            <th>Longtitude</th> 
+        
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td><input id="address" name="address" type="text" class="form-control" /></td>
+              <td style="width: 10%;"><input id="Lat" name="lat"  type="float" class="form-control"  required/></td>
+              <td style="width: 10%;"><input id="Lon" name="lon"  type="float" class="form-control"  required/></td>
+
+               
+              <td><button  onclick="geocodercall()" type="button" id="btn-add" class="btn btn-primary">Get Address</button></td>
+              <td><button  onclick="geocodercall()" type="button" id="btn-add" class="btn btn-primary">Get Lat/Long</button></td>
+            </tr>
+
+                  
+
+          </tbody>
+      </table>
+
+
+	  <table class="table" id= "info">
+        <thead>
+          <tr>
+            <th> Rooftop? </th>
+            <th> Additional Information </th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+                <td>
+                  <select name="roof">
+                    <option value="None"></option>
+                    <option value="True">Yes</option>
+                    <option value="False">No</option>
+                  </select>
+                </td>
+
+              <td><input id="roof" name="info" type="text" </td>
+
+
+            </tr>
+
+                <button type="reset" class="btn btn-danger">Reset</button></td>
+                <button  type="submit" id="btn-add" class="btn btn-primary">Create</button>
+                 
+          </tbody>
+      </table>
+		</form>
+
+          {% if exist_flag %}
+          <script>alert("There seems to already be a submission for the given phone number. Please confirm your number if this is false.");</script>  
+          {% endif %}
+
+
+</div>
+
    <script>
-      // Note: This example requires that you consent to location sharing when
+
+       // Note: This example requires that you consent to location sharing when
       // prompted by your browser. If you see the error "The Geolocation service
       // failed.", it means you probably did not give permission for the browser to
       // locate you.
-      var map, infoWindow;
+      var map, infoWindow, geocoder, marker;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
           zoom: 6
         });
         infoWindow = new google.maps.InfoWindow;
+        geocoder = new google.maps.Geocoder();
+
 
         // Try HTML5 geolocation.
-
-        //Add listener
-
-
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
+            alert(position.coords.latitude + ' , ' + position.coords.longitude);
+            document.getElementById("Lat").value = position.coords.latitude;
+            document.getElementById("Lon").value = position.coords.longitude;
+            title = "Lat: " + pos.lat + " & Lng: " + pos.lng;
+            marker = new google.maps.Marker({
+                  
+                  position: pos,
+                  animation: google.maps.Animation.DROP,
+                  map: map,
+                  title: title
+                });
+            map.setZoom(14);
             map.setCenter(pos);
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
@@ -38,6 +149,25 @@
           // Browser doesn't support Geolocation
           handleLocationError(false, infoWindow, map.getCenter());
         }
+        google.maps.event.addListener(map, 'click', function(event) {
+          item = event.latLng
+          title = item.lat() + " - " + item.lng();
+          if(marker!=null)
+            marker.setMap(null);
+          marker = new google.maps.Marker({
+                
+                position: item,
+                animation: google.maps.Animation.DROP,
+                map: map,
+                title: title
+              });
+            document.getElementById("Lat").value = item.lat();
+            document.getElementById("Lon").value = item.lng();
+
+            }); // End of click listener
+
+          
+
       }
 
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -47,10 +177,38 @@
                               'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
       }
+
+      function geocodercall(){
+            geocodeLatLng(geocoder, map, infoWindow)
+      }
+
+      function geocodeLatLng(geocoder, map, infowindow) {
+        var lat = document.getElementById('Lat').value;
+        var lon = document.getElementById('Lon').value;
+        alert(lat + " + " + lon)
+        var latlng = {lat: parseFloat(lat), lng: parseFloat(lon)};
+        geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            if (results[0]) {
+              map.setZoom(18);
+              var marker = new google.maps.Marker({
+                position: latlng,
+                map: map
+              });
+
+            } else {
+             alert('No results found');
+            }
+          } else {
+            alert('Geocoder failed due to: ' + status);
+          }
+        });
+      }
+
+
+
     </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpFMLQghrkIYglrIvFEAXPIPzr73ApnWw&callback=initMap">
-    </script>
+
 
 {% endblock mapscript %}
 

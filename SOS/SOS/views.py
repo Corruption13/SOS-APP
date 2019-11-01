@@ -1,11 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-def map_view(request):
-    return render(request, "map_view.html")
 
-def map_select(request):
-    return render(request, "map_select.html")
 
 def user_view(request):
  
@@ -17,3 +13,8 @@ def user_view(request):
         return redirect("../map_other")
 
     return render(request, "user.html")
+
+
+
+def submitted_view(request):
+    return render(request, "staysafe.html")

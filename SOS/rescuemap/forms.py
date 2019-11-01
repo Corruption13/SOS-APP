@@ -12,7 +12,7 @@ class ReminderForm(forms.Form):
     info = forms.CharField()  
 
 
-class ReminderDBForm(forms.ModelForm):
+class VictimForm(forms.ModelForm):
     class Meta:
         model = Victim
         fields = [
@@ -20,15 +20,13 @@ class ReminderDBForm(forms.ModelForm):
             'lat',
             'lon',
             'number',
-            'number2',
+            'number_2',
             'roof',
             'info'
 
         ]
 
-class ProfileForm(forms.ModelForm):
-    class Meta:
-        model = Situation
-        fields = [
-            'phone'
-        ]
+#class SituationForm(forms.ModelForm):
+    #class Meta:
+        #model = Situation
+       # pass

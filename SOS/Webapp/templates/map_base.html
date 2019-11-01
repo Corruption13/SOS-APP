@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -18,11 +21,24 @@
   </head>
   <body>
     <div id="panel" style="color: white; border: 10px solid black;">Choose your location</div>
-    <div id="map"></div>
+    <div id="latclicked"></div>
+    <div id="longclicked"></div>
+
+    <div id="latmoved"></div>
+    <div id="longmoved"></div>
+
+    <div style="padding:10px">
+        <div id="map"></div>
+    </div>
      {% block  mapscript %}
 
 
     {% endblock  %}
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpFMLQghrkIYglrIvFEAXPIPzr73ApnWw&callback=initMap">
+    </script>
 
+
+    
   </body>
 </html>
