@@ -3,42 +3,98 @@
   <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
-
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 600px;
+        height: 500px;
       }
       /* Optional: Makes the sample page fill the window. */
+      .form-control{
+        background-color: black; 
+        color: red;
+
+      }
       html, body {
         height: 100%;
         margin: 10px;
+        margin-top: 0px;
         padding: 0;
         background: black;
       }
+      ul.topnav {
+        list-style-type: none;
+        margin-left: -20px;
+        margin-right: -20px;
+        margin-top: 0xp;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+
+        }
+
+        ul.topnav li {float: left;}
+
+        ul.topnav li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        }
+
+        ul.topnav li a:hover:not(.active) {background-color: #111;}
+
+        ul.topnav li a.active {background-color: #4CAF50;}
+
+        ul.topnav li.right {float: right;}
+
+        @media screen and (max-width: 600px) {
+        ul.topnav li.right, 
+        ul.topnav li {float: none;}
+        #map {
+            height: 70%;
+          }
+
+        }
     </style>
   </head>
-  <body>
-    <div id="panel" style="color: white; border: 10px solid black;">Choose your location</div>
-    <div id="latclicked"></div>
-    <div id="longclicked"></div>
-
-    <div id="latmoved"></div>
-    <div id="longmoved"></div>
-
-    <div style="padding:10px">
-        <div id="map"></div>
-    </div>
-     {% block  mapscript %}
+  <body  class="bgimg w3-display-container w3-animate-opacity w3-text-white">
 
 
-    {% endblock  %}
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpFMLQghrkIYglrIvFEAXPIPzr73ApnWw&callback=initMap">
-    </script>
+    <ul class="topnav w3-animate-top">
+      <li><a  href="../">Home</a></li>
+      <li><a href="../map_me">Help me!</a></li>
+      <li><a href="../map_other">Help Others!</a></li>
+      <li class="right"><a href="../admin">Admin</a></li>
+    </ul>
+
+  <div class="w3-animate-bottom">
+      <div id="panel" style="color: white; border: 10px solid black;">Choose your location</div>
+      <div id="latclicked"></div>
+      <div id="longclicked"></div>
+
+      <div id="latmoved"></div>
+      <div id="longmoved"></div>
+
+      <div style="padding:10px">
+          <div id="map"></div>
+      </div>
+
+      {% block  mapscript %}
 
 
+      {% endblock  %}
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpFMLQghrkIYglrIvFEAXPIPzr73ApnWw&callback=initMap">
+  
+      </script>
+
+  </div>
     
   </body>
+
+
 </html>

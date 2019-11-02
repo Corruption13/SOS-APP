@@ -18,3 +18,8 @@ def user_view(request):
 
 def submitted_view(request):
     return render(request, "staysafe.html")
+
+
+
+def test(request):
+    return render(request, "test.html")

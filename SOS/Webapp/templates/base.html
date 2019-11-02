@@ -1,0 +1,84 @@
+
+
+<!DOCTYPE html>
+<html>
+<title>SOS Disaster Management Center</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <style>
+    body,h1 {font-family: "Raleway", sans-serif}
+
+    body, html {
+        height: 100%;
+        background-color: #301934;
+    }
+    .bgimg {
+    background: black;
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+
+    }
+
+
+    ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    -webkit-transition: ease-in 400ms; /* Safari prior 6.1 */
+    transition: .2s;
+    }
+
+    ul.topnav:hover{
+        margin: -1px -3px 0px -3px;
+    }
+
+    ul.topnav li {float: left;}
+
+    ul.topnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    }
+
+    ul.topnav li a:hover:not(.active) {background-color: #111;}
+
+    ul.topnav li a.active {background-color: #4CAF50;}
+
+    ul.topnav li.right {float: right;}
+
+    @media screen and (max-width: 600px) {
+    ul.topnav li.right, 
+    ul.topnav li {display:none;}
+    }
+
+    {% block style %}
+
+    {% endblock style %}
+    </style>
+<body>
+    
+<ul class="topnav w3-animate-top">
+    <li><a  href="../">Home</a></li>
+    <li><a href="../map_me">Help me!</a></li>
+    <li><a href="../map_other">Help Others!</a></li>
+    <li class="right"><a href="../admin">Admin</a></li>
+</ul>
+
+
+{% block body %}
+
+{% endblock %}
+
+</div>
+
+
+</body>
+</html>
+

@@ -8,17 +8,20 @@
 
 <div class="container " >
   <h2>{% block id %}{% endblock %} Please Provide details</h2>
-
+  
   <form id="data" method="POST"> {% csrf_token %}
       <table class="table" id= "create">
         <thead>
+     
           <tr>
-            <th><h3>Victim Data Collection</h3>
+            <th><h3>Victim Data Collection</h3> 
             <br>Name</th>
-
-
-
-            <th>Mobile Number<th>
+            <th>
+              <details>
+                <summary>Phone Number</summary>
+                <p style="font-weight: normal;"> How to keep your phone charged without electricity: <a style="color:green;" href="https://mashtips.com/charge-mobile-phone-without-electric-power/">Link</a></p>
+              </details>
+            <th>
 
 
 
@@ -29,11 +32,12 @@
         <tbody>
 
         <tr>
-            <td><input id="name" name="name" type="text" class="form-control" required/></td>
+            <td><input id="name" name="name" type="text" class="form-control" required placeholder="Your Name"/></td>
 
 
             
-            <td style="width: 20%;"><input name="number" id="number" type="tel" class="form-control" required/></td>
+            <td style="width:33%;"><input id="name" name="number" id="number" type="tel" class="form-control" placeholder="Keep battery charged."/></td>
+                      
             
         </tr>
     
@@ -45,6 +49,7 @@
         <thead>
           <tr>
             <th>Address</th>
+            <th></th>
             <th>Latitude</th>
             <th>Longtitude</th> 
         
@@ -54,19 +59,41 @@
           
             <tr>
               <td><input id="address" name="address" type="text" class="form-control" /></td>
+              <td><button  onclick="geocodercall()" type="button" id="btn-add" class="btn btn-warning">Get Lat/Long</button></td>
               <td style="width: 10%;"><input id="Lat" name="lat"  type="float" class="form-control"  required/></td>
               <td style="width: 10%;"><input id="Lon" name="lon"  type="float" class="form-control"  required/></td>
+              <td><button  onclick="geocodercall()" type="button" id="btn-add" class="btn btn-info">Get Address</button></td>
 
-               
-              <td><button  onclick="geocodercall()" type="button" id="btn-add" class="btn btn-primary">Get Address</button></td>
-              <td><button  onclick="geocodercall()" type="button" id="btn-add" class="btn btn-primary">Get Lat/Long</button></td>
             </tr>
 
                   
 
           </tbody>
       </table>
+      <table class="table" id= "create">
+              <thead>
+            
+                  <tr>
+                    <th>Total Number of Adults</th>
+                    <th>Total Number of Children</th>
+                    <th>Total Number of very Elderly</th>
 
+
+                    
+
+                  </tr>
+              </thead>
+              <tbody>
+
+                  <tr>
+                      <td style="width:33%;"><input id="total_adults" name="total_adults" type="number" class="form-control" value="1"/></td>
+                      <td style="width:33%;"><input id="total_children" name="total_children" id="total_children" type="number" class="form-control" placeholder="below 18"/></td>
+                      <td style="width:33%;"><input id="total_elderly" name="total_elderly" id="total_elderly" type="number" class="form-control" placeholder="face physical restrictions "/></td>
+                  </tr>
+          
+
+              </tbody>
+      </table>
 
 	  <table class="table" id= "info">
         <thead>
@@ -76,24 +103,28 @@
             
           </tr>
         </thead>
-        <tbody>
+        <tbody style="color:black;">
           
             <tr>
                 <td>
-                  <select name="roof">
+                  <select name="roof" class="form-control">
                     <option value="None"></option>
                     <option value="True">Yes</option>
                     <option value="False">No</option>
                   </select>
                 </td>
 
-              <td><input id="roof" name="info" type="text" </td>
+              <td><input id="roof" name="info" type="text" class="form-control" </td>
 
-
+              
             </tr>
 
-                <button type="reset" class="btn btn-danger">Reset</button></td>
-                <button  type="submit" id="btn-add" class="btn btn-primary">Create</button>
+            <tr>
+                <td> <button  type="submit" id="btn-add" class="btn btn-success">Submit</button> </td>
+            </tr>
+
+                
+                
                  
           </tbody>
       </table>
@@ -116,7 +147,7 @@
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
-          zoom: 6
+          zoom: 15
         });
         infoWindow = new google.maps.InfoWindow;
         geocoder = new google.maps.Geocoder();
@@ -129,7 +160,7 @@
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-            alert(position.coords.latitude + ' , ' + position.coords.longitude);
+        
             document.getElementById("Lat").value = position.coords.latitude;
             document.getElementById("Lon").value = position.coords.longitude;
             title = "Lat: " + pos.lat + " & Lng: " + pos.lng;
@@ -165,6 +196,21 @@
             document.getElementById("Lon").value = item.lng();
 
             }); // End of click listener
+                    var victims = JSON.parse('{{ jsonobj | escapejs }}');
+            var situations = JSON.parse('{{ situation | escapejs }}');
+            var cityCircle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.2,
+            strokeWeight: 0.75,
+            fillColor: '#ca0b00',
+            fillOpacity: 0.18,
+            map: map,
+            clickable: false,
+            center: {lat: situations[0].fields.c_lat, lng: situations[0].fields.c_lon},
+            radius: situations[0].fields.radius
+          });
+        
+      
 
           
 

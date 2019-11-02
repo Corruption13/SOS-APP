@@ -15,15 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import (user_view, submitted_view)
-from rescuemap.views import (map_select, map_view)
+from .views import (
+    user_view,                  # User Panel
+    submitted_view,              # End of submission message.
+    test
+    )
+from rescuemap.views import (
+    map_select,                 # User rescue plea submission.
+    map_view                    # Admin user distribution viewer
+    )
 
 urlpatterns = [
     path('map_me/', map_select),
     path('map_other/', map_view),
-    path('admins/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', user_view),
-    path('done/', submitted_view)
-    
+    path('done/', submitted_view),
+    path('test/', test)
 
 ]
