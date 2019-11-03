@@ -7,7 +7,7 @@
 {% block mapscript %}
 
 <div class="container " >
-  <h2>{% block id %}{% endblock %} Please Provide details</h2>
+  <h2>{{user_id}} Please Provide details</h2>
   
   <form id="data" method="POST"> {% csrf_token %}
       <table class="table" id= "create">
@@ -15,17 +15,14 @@
      
           <tr>
             <th><h3>Victim Data Collection</h3> 
-            <br>Name</th>
+            <br>Your Name</th>
             <th>
               <details>
-                <summary>Phone Number</summary>
+                <summary>Your Phone Number</summary>
                 <p style="font-weight: normal;"> How to keep your phone charged without electricity: <a style="color:green;" href="https://mashtips.com/charge-mobile-phone-without-electric-power/">Link</a></p>
               </details>
             <th>
 
-
-
-            
 
           </tr>
         </thead>
@@ -37,14 +34,16 @@
 
             
             <td style="width:33%;"><input id="name" name="number" id="number" type="tel" class="form-control" placeholder="Keep battery charged."/></td>
-                      
-            
+                        
         </tr>
     
 
           </tbody>
       </table>
+    {% block other %}
+      
 
+    {% endblock other %}
 	  <table class="table" id= "address">
         <thead>
           <tr>
@@ -52,7 +51,12 @@
             <th></th>
             <th>Latitude</th>
             <th>Longtitude</th> 
-        
+            <th>
+                            <details>
+                <summary>How to get these?</summary>
+                <p style="font-weight: normal;"> Simply click your location in the map above and we will automatically fill this field</p>
+                </details>
+            </th>
           </tr>
         </thead>
         <tbody>

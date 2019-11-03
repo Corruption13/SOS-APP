@@ -1,0 +1,40 @@
+{% extends 'map_select.html' %}
+
+{% block other %}
+    <table class="table" id= "create">
+        <thead>
+        
+            <tr>
+            <th>
+            <br>               
+                    <details>
+                        <summary>Victims Name</summary>
+                        <p style="font-weight: normal;"> Name of any one of the victims for identification </p>
+                    </details
+                ></th>
+            <th>
+                <details>
+                <summary>Victim's Phone Number</summary>
+                <p style="font-weight: normal;"> We will use this to contact them if possible. </p>
+                </details>
+            <th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td><input id="name_2" name="name_2" type="text" class="form-control" required placeholder="Your Name"/></td>
+
+
+            
+            <td style="width:33%;"><input id="name" name="number_2" id="number_2" type="tel" class="form-control" placeholder="Keep battery charged."/></td>
+                        
+        </tr>
+
+
+            </tbody>
+        </table>
+
+{% endblock other %}

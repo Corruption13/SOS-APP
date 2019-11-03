@@ -18,19 +18,31 @@ from django.urls import path
 from .views import (
     user_view,                  # User Panel
     submitted_view,              # End of submission message.
-    test
+    test,
+    register_view,
+    login_view,
+    logout_view,
+    panel_view,
+    reg_done
     )
 from rescuemap.views import (
     map_select,                 # User rescue plea submission.
+    map_select_2,
     map_view                    # Admin user distribution viewer
+
     )
 
 urlpatterns = [
     path('map_me/', map_select),
-    path('map_other/', map_view),
+    path('map_other/', map_select_2),
+    path('rescue/', map_view),
     path('admin/', admin.site.urls),
     path('', user_view),
     path('done/', submitted_view),
-    path('test/', test)
-
+    path('test/', test),
+    path('register/', register_view),
+    path('login/', login_view),
+    path('logout/', logout_view),
+    path('panel/', panel_view),
+    path('reg_done/', reg_done),
 ]

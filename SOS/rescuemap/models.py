@@ -34,3 +34,14 @@ class Situation(models.Model):
     radius = models.IntegerField()              # Radius of Situation
     start_time = models.TimeField(null=True)             # Starting time of Situation
     active = models.BooleanField(default=False)
+
+class RescueTeam(models.Model):
+        user = models.ForeignKey(USER , default=1, on_delete=models.CASCADE)
+        phone = models.PositiveIntegerField()
+        valid = models.BooleanField(default=False)
+        # timezone = TimeZoneField(default='Asia/Kolkata')
+        @classmethod
+        def create(cls, user, phone, valid):
+            member = cls(user=user, phone=phone, valid=valid)
+            # do something with the book
+            return member

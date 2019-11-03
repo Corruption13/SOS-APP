@@ -1,0 +1,76 @@
+{% extends 'base_auth.html' %}
+
+
+{% block body %}
+
+    <div id="container-register">
+        <div id="title">
+            <i class="material-icons lock">lock</i> Register
+        </div>
+
+        <form method="POST">  {% csrf_token %}
+            <!--
+            <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">email</i>
+                </div>
+                <input id="email" name="email" placeholder="Email" type="username" required class="validate" autocomplete="off">
+            </div>
+            -->
+            <div class="clearfix"></div>
+
+            <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">face</i>
+                </div>
+                <input id="username" name="username" placeholder="Username" type="text" required class="validate" autocomplete="off">
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">vpn_key</i>
+                </div>
+                <input id="password" name="password1" placeholder="Password" type="password" required class="validate" autocomplete="off">
+            </div>
+
+            <div class="clearfix"></div>
+            
+            <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">person_pin</i>
+                </div>
+                <input id="first_name" name="first_name" placeholder="First Name" type="text"  class="validate" autocomplete="on">
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">tag_faces</i>
+                </div>
+                <input id="last_name" name="last_name" placeholder="Last Name" type="text"  class="validate" autocomplete="on">
+            </div>    
+            <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">tag</i>
+                </div>
+                <input id="password" name="phone" placeholder="Phone Number" type="text" required class="validate" autocomplete="off">
+            </div>
+    
+            <!--
+            <div class="remember-me">
+                <input type="checkbox">
+                <span style="color: #DDD">I accept Terms of Service</span>
+            </div>
+-->
+        <br>
+            <input type="submit" value="Register" />
+        </form>
+        <div class="register">
+            Do you already have an account?
+            <a href="../login"><button id="register-link">Log In here</button></a>
+        </div>
+    </div>
+{% endblock body %}

@@ -2,6 +2,7 @@
 
 
 {% block mapscript %}
+
    <script>
       var iconBase =
         'https://developers.google.com/maps/documentation/javascript/examples/full/images/';
@@ -71,7 +72,7 @@
                 +'<tr> <th>Elderly: &nbsp</th> <td>'+item.total_elderly+'</td> </tr> <tr> <th>Adults &nbsp</th> <td>'+item.total_adults+'</td> </tr> </table> </div> </div>';
           
             let infowindow = new google.maps.InfoWindow({
-              content: "<div style=\"opacity: 0.8; color:red;\">" + contentString + "</div>"
+              content: "<div  style=\"opacity: 0.8; color:red; line-height: 1.35;overflow: hidden; white-space: nowrap;\">" + contentString + "</div>"
             });
 
             marker = new google.maps.Marker({
