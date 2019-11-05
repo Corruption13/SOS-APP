@@ -1,1 +1,1 @@
-A Web-App for managing disasters all over the world.
+A Web-App Framework for managing disasters all over the world.
