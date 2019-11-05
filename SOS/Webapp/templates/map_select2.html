@@ -38,3 +38,24 @@
         </table>
 
 {% endblock other %}
+
+
+{% block geolocation %}
+
+        
+
+            var pos = {
+              lat: situations[0].fields.c_lat,
+              lng: situations[0].fields.c_lon
+            };
+            if(situations[0].fields.radius<15000)
+                map.setZoom(18);
+            else if(situations[0].fields.radius < 15000)
+                    map.setZoom(12);
+            else
+                map.setZoom(8);
+            map.setCenter(pos);
+
+         
+
+{% endblock geolocation %}

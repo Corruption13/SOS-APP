@@ -1,0 +1,49 @@
+body,h1 {font-family: "Raleway", sans-serif}
+
+body, html {
+    height: 100%;
+    background-color: #301934;
+}
+.bgimg {
+background: black;
+min-height: 100%;
+background-position: center;
+background-size: cover;
+
+}
+
+
+ul.topnav {
+list-style-type: none;
+margin: 0;
+padding: 0;
+overflow: hidden;
+background-color: #333;
+-webkit-transition: ease-in 400ms; /* Safari prior 6.1 */
+transition: .2s;
+}
+
+ul.topnav:hover{
+    margin: -1px -3px 0px -3px;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+display: block;
+color: white;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {background-color: #111;}
+
+ul.topnav li a.active {background-color: #4CAF50;}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+ul.topnav li.right, 
+ul.topnav li {display:none;}
+}

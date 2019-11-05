@@ -7,7 +7,7 @@
 {% block mapscript %}
 
 <div class="container " >
-  <h2>{{user_id}} Please Provide details</h2>
+  <h2>{{user_id}} Please Provide details - Not all fields neeeded.</h2>
   
   <form id="data" method="POST"> {% csrf_token %}
       <table class="table" id= "create">
@@ -29,21 +29,22 @@
         <tbody>
 
         <tr>
-            <td><input id="name" name="name" type="text" class="form-control" required placeholder="Your Name"/></td>
+            <td><input id="name" name="name" type="text" class="form-control" placeholder="Your Name"/></td>
 
 
             
-            <td style="width:33%;"><input id="name" name="number" id="number" type="tel" class="form-control" placeholder="Keep battery charged."/></td>
+            <td style="width:33%;"><input id="name" name="number" id="number" type="tel" class="form-control" required placeholder="Keep battery charged."/></td>
                         
         </tr>
     
 
           </tbody>
       </table>
-    {% block other %}
-      
 
+    {% block other %}
+        <!-- For Save Friend/Relative Template -->
     {% endblock other %}
+
 	  <table class="table" id= "address">
         <thead>
           <tr>
@@ -91,8 +92,8 @@
 
                   <tr>
                       <td style="width:33%;"><input id="total_adults" name="total_adults" type="number" class="form-control" value="1"/></td>
-                      <td style="width:33%;"><input id="total_children" name="total_children" id="total_children" type="number" class="form-control" placeholder="below 18"/></td>
-                      <td style="width:33%;"><input id="total_elderly" name="total_elderly" id="total_elderly" type="number" class="form-control" placeholder="face physical restrictions "/></td>
+                      <td style="width:33%;"><input id="total_children" name="total_children" id="total_children" type="number" class="form-control" placeholder="below 18" value="0"/></td>
+                      <td style="width:33%;"><input id="total_elderly" name="total_elderly" id="total_elderly" type="number" class="form-control" placeholder="face physical restrictions." value="0"/></td>
                   </tr>
           
 
@@ -102,7 +103,7 @@
 	  <table class="table" id= "info">
         <thead>
           <tr>
-            <th> Rooftop? </th>
+            <th> Rooftop? (Airlift) </th>
             <th> Additional Information </th>
             
           </tr>
@@ -112,7 +113,7 @@
             <tr>
                 <td>
                   <select name="roof" class="form-control">
-                    <option value="None"></option>
+                    <option value="Not Sure">Not Sure</option>
                     <option value="True">Yes</option>
                     <option value="False">No</option>
                   </select>
@@ -147,6 +148,8 @@
       // prompted by your browser. If you see the error "The Geolocation service
       // failed.", it means you probably did not give permission for the browser to
       // locate you.
+      var victims = JSON.parse('{{ jsonobj | escapejs }}');
+      var situations = JSON.parse('{{ situation | escapejs }}');
       var map, infoWindow, geocoder, marker;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -158,6 +161,8 @@
 
 
         // Try HTML5 geolocation.
+        {% block  geolocation%}
+        
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
@@ -184,6 +189,10 @@
           // Browser doesn't support Geolocation
           handleLocationError(false, infoWindow, map.getCenter());
         }
+
+        {% endblock geolocation%}
+
+
         google.maps.event.addListener(map, 'click', function(event) {
           item = event.latLng
           title = item.lat() + " - " + item.lng();
@@ -200,14 +209,13 @@
             document.getElementById("Lon").value = item.lng();
 
             }); // End of click listener
-                    var victims = JSON.parse('{{ jsonobj | escapejs }}');
-            var situations = JSON.parse('{{ situation | escapejs }}');
+
             var cityCircle = new google.maps.Circle({
             strokeColor: '#FF0000',
-            strokeOpacity: 0.2,
+            strokeOpacity: 0.75,
             strokeWeight: 0.75,
             fillColor: '#ca0b00',
-            fillOpacity: 0.18,
+            fillOpacity: 0.135,
             map: map,
             clickable: false,
             center: {lat: situations[0].fields.c_lat, lng: situations[0].fields.c_lon},
@@ -257,6 +265,17 @@
 
 
 
+    </script>
+
+
+    <script>
+        function CheckColors(val){
+        var element=document.getElementById('color');
+        if(val=='pick a color' || val=='others')
+          element.style.display='block';
+        else  
+          element.style.display='none';
+        }
     </script>
 
 

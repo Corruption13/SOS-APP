@@ -5,7 +5,26 @@
 
 Thanks for voluneering, please wait while the Admin verifies your account!
 
+Try logging in after a while to check if verified.
 
-<a href="../"> Click here to continue </a>
+<div class="bgimg w3-display-container w3-animate-opacity w3-animate-zoom w3-text-white">
 
+  <div class="w3-display-middle">
+    <form method="POST">  {% csrf_token %}
+        <h1 class="w3-jumbo w3-animate-top w3-display-middle">Registeration Recieved</h1>
+        <hr class="w3-border-grey" style="margin:auto;width:40%">
+        
+        <p class="w3-large w3-center w3-animate-bottom">Thanks for voluneering, please wait while the Admin verifies your account!</p>
+        <p class="w3-large w3-center w3-animate-bottom">Try logging in after a while to check if verified.</p>
+        <p><br></p>
+        <p class="w3-center w3-animate-bottom"><a href="../"  style="text-decoration: none;"> click to go back home.</a></p>
+        
+    </form> 
+  </div>
+
+</div>
+
+<div class="w3-display-bottomleft w3-padding-large" style="color:red;">
+ <a id="watermark" href="https://github.com/raksha-oss/SOS-API" target="_blank" style="text-decoration: none;"> Powered by S.O.S</a>
+</div>
 {% endblock body %}

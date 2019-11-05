@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.core import serializers
 import json
+from datetime import datetime
 from math import sin, cos, sqrt, atan2, radians
 # Create your views here.
 
@@ -42,12 +43,12 @@ def map_select(request):
         total_adults = request.POST['total_adults']
         total_children = request.POST['total_children']
         total_elderly = request.POST['total_elderly']  
-
-        #print(situation[0].name)
-        R = 6373.0
+        time = datetime.now()
+  
+        R = 6373.0                         # Approx Radius of Earth
         lat1 = radians(float(lat))
         lon1 = radians(float(lon))
-        lat2 = radians(float(situation[0].c_lat))
+        lat2 = radians(float(situation[0].c_lat))                           ## DISTANCE BETWEEN TWO GEOCOORDINATES
         lon2 = radians(float(situation[0].c_lon))
         dlon = lon2 - lon1
         dlat = lat2 - lat1
@@ -66,7 +67,7 @@ def map_select(request):
             return render(request, "map_select.html", {"exist_flag":True, "jsonobj": data, "situation": data2, "user_id": user_name})
         
         else:
-            obj = Victim.objects.create(name=name, lat=lat, lon=lon, address=address, number=number, number_2=number_2, roof=roof, info = info,total_children = total_children, total_adults = total_adults, total_elderly=total_elderly, inside_dz = inside_dz)
+            obj = Victim.objects.create(name=name, lat=lat, lon=lon, address=address, number=number, number_2=number_2, roof=roof, info = info,total_children = total_children, total_adults = total_adults, total_elderly=total_elderly, inside_dz = inside_dz, time_of_creation = time)
             obj.save()
             return redirect("../done")
 
@@ -83,7 +84,7 @@ def map_select_2(request):
     data2 = serializers.serialize("json", situation)
     if request.method == "POST":
 
-        name = request.POST['name']
+        name = request.POST['name_2']
         lat = request.POST['lat']
         lon = request.POST['lon']
         address = request.POST['address']

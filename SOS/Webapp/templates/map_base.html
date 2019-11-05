@@ -63,6 +63,7 @@
             height: 70%;
           }
 
+
         }
 
       
@@ -71,14 +72,15 @@
   <body  class="bgimg w3-display-container w3-animate-opacity w3-text-white">
 
 
-    <ul class="topnav w3-animate-top">
-      <li><a  href="../">Home</a></li>
-      <li><a href="../map_me">Help me!</a></li>
-      <li><a href="../map_other">Help Others!</a></li>
-      
-      <li class="right"><a href="../admin">Admin</a></li>
-      <li class="right"><a href="../panel">{{user_id}} </a></li>
-    </ul>
+<ul class="topnav w3-animate-top">
+    <li><a  href="../">Home</a></li>
+    <li><a href="../map_me">Help me!</a></li>
+    <li><a href="../map_other">Help Others!</a></li>
+    <li class="right"><a href="../admin">Admin</a></li>
+    <li class="right"><a href="../panel">{% block id %}User{% endblock %}</a></li>
+
+</ul>
+
 
   <div class="w3-animate-bottom">
       <div id="panel" style="color: white; border: 10px solid black;">Choose your location</div>

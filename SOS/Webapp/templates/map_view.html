@@ -2,11 +2,41 @@
 
 
 {% block mapscript %}
+    <style> 
+        #map{
+          height: 90vh;
+          width: 80 vw;
+        }
+        .info{
+            opacity: 0.7;
+             color: darkblue; 
+             font-size: 16px; 
+             line-height: 1.35;
+             overflow: auto; 
+             white-space: nowrap;
+        }
+        @media(max-width: 769px) {
+          .info{
+          opacity: 0.7;
+          color:red; 
+          font-size: 30px; 
+          line-height: 1.35;
+          overflow: auto; 
+          white-space: nowrap;
+          }
+
+        }
+    </style>
+
+
+
 
    <script>
-      var iconBase =
-        'https://developers.google.com/maps/documentation/javascript/examples/full/images/';
-      var pos;
+      RESTRICTED_MODE = true; // This disables markers outside the Danger zone.
+
+
+      var iconBase = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/';
+      
 
 
       function initMap() {
@@ -47,6 +77,7 @@
         var marker;
         var markers = [];
         var infowindow;
+        var infoWindows = [];
         var marker_info_map;
         console.log(victims[0].fields.number_2)
         console.log(victims.length)
@@ -54,48 +85,50 @@
         for(var i = 0; i < victims.length; i++){
 
             item = victims[i].fields 
-            if(item.inside_dz == false)
-              continue;
+            if(item.inside_dz == true || RESTRICTED_MODE == false )
+            {
 
-            if(item.roof==true) item.roof="Yes"; else if(item.roof==false) item.roof = "No"; else item.roof="Not sure";
-            if(item.address==null) item.address = "Not given!";
+                if(item.roof==true) item.roof="Yes"; else if(item.roof==false) item.roof = "No"; else item.roof="Not sure";
+                if(item.address==null) item.address = "Not given!";
 
-            locations.push({lat: item.lat, lng: item.lon});
-          
-            var contentString = "ID: " + i + '<div id="content">'+
-                '<div id="siteNotice"> </div> <h1 id="firstHeading" class="firstHeading">' + item.name + '</h1>'+
-                '<div id="bodyContent">'+
-                '<table style="width:100%"> <tr> <th>Name:</th> <td>'+item.name+'</td> </tr> <tr> <th>Phone:</th> <td>'
-                +item.number_2+'</td> </tr> <tr> <th>Address:</th> <td>'+item.address+'</td> </tr> <tr> <th>Latitude:</th> <td>'
-                +item.lat+'</td> </tr> <tr> <th>Longitude:</th> <td>'+item.lon+'</td> </tr> <tr> <th>Roof:</th> <td>'+item.roof
-                + '</td></tr> <tr> <th>Spec. Info: &nbsp</th> <td>'+item.info+'</td> </tr> <tr> <th>Children: &nbsp</th> <td>'+item.total_children+'</td> </tr> '
-                +'<tr> <th>Elderly: &nbsp</th> <td>'+item.total_elderly+'</td> </tr> <tr> <th>Adults &nbsp</th> <td>'+item.total_adults+'</td> </tr> </table> </div> </div>';
-          
-            let infowindow = new google.maps.InfoWindow({
-              content: "<div  style=\"opacity: 0.8; color:red; line-height: 1.35;overflow: hidden; white-space: nowrap;\">" + contentString + "</div>"
-            });
+                locations.push({lat: item.lat, lng: item.lon});
+              
+                var contentString = "ID: " + i + "<div style=\"float:right;\">At: " + item.time_of_creation + '</div> <div id="content">'+
+                    '<div id="siteNotice"> </div> <h1 id="firstHeading" class="firstHeading">' + item.name + '</h1>'+
+                    '<div id="bodyContent"> <table style="width:100%"> <tr> <th>Phone:</th> <td>' + 
+                    "<a name=\"Click to call\" href=\"" + item.number_2+ "\">" + item.number_2 + '</td> </tr>'+ 
+                    ' <tr> <th>Address:</th> <td>'+item.address+'</td> </tr> <tr> <th>Latitude:</th> <td>'
+                    +item.lat+'</td> </tr> <tr> <th>Longitude:</th> <td>'+item.lon+'</td> </tr> <tr> <th>Roof:</th> <td>'+item.roof
+                    + '</td></tr> <tr> <th>Children: &nbsp</th> <td>'+item.total_children+'</td> </tr> '
+                    +'<tr> <th>Elderly: &nbsp</th> <td>'+item.total_elderly+'</td> </tr> <tr> <th>Adults: &nbsp</th> <td>'+item.total_adults+'</td> </tr> + <tr> <th>Spec. Info: &nbsp</th> <td>'+item.info+'</td> </tr> </table> </div> </div>';
+              
+                let infowindow = new google.maps.InfoWindow({
+                  content: "<div  class=\"info \">" + contentString + "</div>"
+                });
 
-            marker = new google.maps.Marker({
-              icon: iconBase + 'parking_lot_maps.png',
-              position: locations[i],
-              animation: google.maps.Animation.DROP,
-              map: map,
-              title: victims[i].fields.name
-            });
-            markers.push(marker);
+                marker = new google.maps.Marker({
+                  //icon: iconBase + 'parking_lot_maps.png',
+                  position: locations[i],
+                  animation: google.maps.Animation.DROP,
+                  map: map,
+                  title: victims[i].fields.name
+                });
+                markers.push(marker);
+                infoWindows.push(infowindow);
+                
 
-            
-            marker.addListener('click', function() {
-              infowindow.open(map, this);
-            });
-                    
+                marker.addListener('click', function() {
+                  infowindow.open(map, this);
+                  
+                });
+            }     
 
         }
+
+
         var markerCluster = new MarkerClusterer(map, markers,
         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-        for(var i = 0; i < victims.length; i++){
-            console.log(locations[i].lat + " + " + locations[i].lng);
-        }
+
         // Construct the circle for each value in citymap.
         // Note: We scale the area of the circle based on the population.
 
@@ -114,7 +147,6 @@
       }
 
 
-      
 
 
 

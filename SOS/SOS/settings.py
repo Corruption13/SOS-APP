@@ -55,7 +55,7 @@ ROOT_URLCONF = 'SOS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "Webapp/templates")],
+        'DIRS': [os.path.join(BASE_DIR, "Webapp/templates"), os.path.join(BASE_DIR, "Webapp/static"), os.path.join(BASE_DIR, "Webapp/assets")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -3,8 +3,28 @@
 
 
 {% block body %}
+<div class="bgimg w3-display-container w3-animate-opacity w3-animate-zoom w3-text-white">
 
-Thanks for letting us know, we'll get to you soon, hang on tight!
+  <div class="w3-display-middle">
+    <form method="POST">  {% csrf_token %}
+        <h1 class="w3-jumbo w3-animate-top w3-display-middle">Submission Recieved</h1>
+        <hr class="w3-border-grey" style="margin:auto;width:40%">
+        
+        <p class="w3-large w3-center w3-animate-bottom">Thanks for letting us know, we'll get to you soon, hang on tight!</p>
+        <p class="w3-large w3-center w3-animate-bottom"><button type="submit" name="extra1" id="extra1" value="extra1"><a href="#SafetyPage" target="_blank" style="text-decoration: none;"> Safety Instructions</a></button></p>
+        <p><br></p>
+        <p class="w3-center w3-animate-bottom"><a href="javascript:close();"  style="text-decoration: none;"> click to close this window.</a></p>
+        
+    </form> 
+  </div>
+
+</div>
+
+<div class="w3-display-bottomleft w3-padding-large" style="color:red;">
+ <a id="watermark" href="https://github.com/raksha-oss/SOS-API" target="_blank" style="text-decoration: none;"> Powered by S.O.S</a>
+</div>
+
+
 <a href="../"> Click here to continue </a>
 
 {% endblock body %}
