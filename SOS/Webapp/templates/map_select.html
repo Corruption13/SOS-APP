@@ -7,14 +7,20 @@
 {% block mapscript %}
 
 <div class="container " >
+  {% block map_select2 %}
   <h2>{{user_id}} Please Provide details - Not all fields neeeded.</h2>
-  
+
+
+    <button style="float:right;" type="submit" title="Submit it without details" id="btn-add" class="btn btn-success">Quick Submit</button>
+    <!-- Comment this out for other person rescue mode -->
+  {% endblock map_select2 %}
+
   <form id="data" method="POST"> {% csrf_token %}
       <table class="table" id= "create">
         <thead>
      
           <tr>
-            <th><h3>Victim Data Collection</h3> 
+            <th><h3>Victim Data Collection </h3>  
             <br>Your Name</th>
             <th>
               <details>
@@ -64,10 +70,10 @@
           
             <tr>
               <td><input id="address" name="address" type="text" class="form-control" /></td>
-              <td><button  onclick="geocodercall()" type="button" id="btn-add" class="btn btn-warning">Get Lat/Long</button></td>
+              <td><button  onclick="#geocodercall()" type="button" id="btn-add" class="btn btn-warning" disabled>Get Lat/Long</button></td>
               <td style="width: 10%;"><input id="Lat" name="lat"  type="float" class="form-control"  required/></td>
               <td style="width: 10%;"><input id="Lon" name="lon"  type="float" class="form-control"  required/></td>
-              <td><button  onclick="geocodercall()" type="button" id="btn-add" class="btn btn-info">Get Address</button></td>
+              <td><button  onclick="#geocodercall()"  type="button" id="btn-add" class="btn btn-info" disabled>Get Address</button></td>
 
             </tr>
 

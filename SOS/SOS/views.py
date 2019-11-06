@@ -102,13 +102,22 @@ def logout_view(request):
 
 def panel_view(request):
     if request.POST.get("register"):
-        print("yes")
         return redirect("../register")
-    elif request.POST.get("login"):  # You can use else in here too if there is only 2 submit types.
-        print("no")
+    elif request.POST.get("login"):  
         return redirect("../login")
 
-    return render(request, "authpanel.html")
+    elif request.POST.get("rescue"): 
+        return redirect("../rescue")
+
+    elif request.POST.get("extra1"):  
+        return redirect(".")
+ 
+    elif request.POST.get("extra2"):  
+        return redirect(".")
+
+
+    else:
+        return render(request, "authpanel.html")
 
 def reg_done(request):
     return render(request, "reg_done.html")

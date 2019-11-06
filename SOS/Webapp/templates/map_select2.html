@@ -25,12 +25,8 @@
         <tbody>
 
         <tr>
-            <td><input id="name_2" name="name_2" type="text" class="form-control" required placeholder="Your Name"/></td>
-
-
-            
-            <td style="width:33%;"><input id="name" name="number_2" id="number_2" type="tel" class="form-control" placeholder="Keep battery charged."/></td>
-                        
+            <td><input id="name_2" name="name_2" type="text" class="form-control" required placeholder="Victim's Name"/></td>
+            <td style="width:33%;"><input id="name" name="number_2" id="number_2" type="tel" class="form-control" placeholder="Victim's Charged Number"/></td>
         </tr>
 
 
@@ -39,10 +35,18 @@
 
 {% endblock other %}
 
+{% block map_select2 %}
+
+  <h2>{{user_id}} Please Provide details.</h2>
+    <button  style="float:right;" type="submit" title="Only available for self rescue mode" id="btn-add" class="btn btn-success" disabled>Quick Submit</button>
+
+{% endblock map_select2 %}
+
+
 
 {% block geolocation %}
 
-        
+            // Comments out the geolocation of other view.
 
             var pos = {
               lat: situations[0].fields.c_lat,
@@ -59,3 +63,4 @@
          
 
 {% endblock geolocation %}
+

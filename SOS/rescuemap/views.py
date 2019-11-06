@@ -43,8 +43,9 @@ def map_select(request):
         total_adults = request.POST['total_adults']
         total_children = request.POST['total_children']
         total_elderly = request.POST['total_elderly']  
-        time = datetime.now()
-  
+        name_2 = name
+        
+        # Distance Calculation 
         R = 6373.0                         # Approx Radius of Earth
         lat1 = radians(float(lat))
         lon1 = radians(float(lon))
@@ -67,7 +68,22 @@ def map_select(request):
             return render(request, "map_select.html", {"exist_flag":True, "jsonobj": data, "situation": data2, "user_id": user_name})
         
         else:
-            obj = Victim.objects.create(name=name, lat=lat, lon=lon, address=address, number=number, number_2=number_2, roof=roof, info = info,total_children = total_children, total_adults = total_adults, total_elderly=total_elderly, inside_dz = inside_dz, time_of_creation = time)
+            obj = Victim.objects.create(
+                name=name, 
+                name_2 = name_2, 
+                lat=lat, lon=lon, 
+                address=address, 
+                number=number, 
+                number_2=number_2, 
+                roof=roof, 
+                info = info,
+                total_children = total_children, 
+                total_adults = total_adults, 
+                total_elderly=total_elderly, 
+                inside_dz = inside_dz, 
+                time_of_creation = datetime.now()
+                )
+                
             obj.save()
             return redirect("../done")
 
@@ -84,7 +100,8 @@ def map_select_2(request):
     data2 = serializers.serialize("json", situation)
     if request.method == "POST":
 
-        name = request.POST['name_2']
+        name = request.POST['name']
+        name_2 = request.POST['name_2']
         lat = request.POST['lat']
         lon = request.POST['lon']
         address = request.POST['address']
@@ -119,7 +136,21 @@ def map_select_2(request):
             return render(request, "map_select2.html", {"exist_flag":True, "jsonobj": data, "situation": data2, "user_id": request.user.first_name})
         
         else:
-            obj = Victim.objects.create(name=name, lat=lat, lon=lon, address=address, number=number, number_2=number_2, roof=roof, info = info,total_children = total_children, total_adults = total_adults, total_elderly=total_elderly, inside_dz = inside_dz)
+            obj = Victim.objects.create(
+                name=name_2, 
+                name_2=name, 
+                lat=lat, 
+                lon=lon, 
+                address=address, 
+                number=number, 
+                number_2=number_2, 
+                roof=roof, 
+                info = info,
+                total_children = total_children,
+                total_adults = total_adults, 
+                total_elderly=total_elderly, 
+                inside_dz = inside_dz, time_of_creation = datetime.now()
+                )
             obj.save()
             return redirect("../done")
 

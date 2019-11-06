@@ -45,7 +45,7 @@
           var situations = JSON.parse('{{ situation | escapejs }}');
         }
         catch(err){
-          
+            console.log("Error initalising map:" +  err);
         }
   
        
@@ -79,21 +79,21 @@
         var infowindow;
         var infoWindows = [];
         var marker_info_map;
-        console.log(victims[0].fields.number_2)
-        console.log(victims.length)
+        console.log(victims[0].fields.number_2);
+        console.log(victims.length);
 
         for(var i = 0; i < victims.length; i++){
 
             item = victims[i].fields 
             if(item.inside_dz == true || RESTRICTED_MODE == false )
             {
-
+                var content = ""
                 if(item.roof==true) item.roof="Yes"; else if(item.roof==false) item.roof = "No"; else item.roof="Not sure";
                 if(item.address==null) item.address = "Not given!";
 
                 locations.push({lat: item.lat, lng: item.lon});
               
-                var contentString = "ID: " + i + "<div style=\"float:right;\">At: " + item.time_of_creation + '</div> <div id="content">'+
+                var contentString = "ID: " + i + "<div style=\"float:right;\">At: " + item.time_of_creation + '</div>'+ content + ' <div id="content">'+
                     '<div id="siteNotice"> </div> <h1 id="firstHeading" class="firstHeading">' + item.name + '</h1>'+
                     '<div id="bodyContent"> <table style="width:100%"> <tr> <th>Phone:</th> <td>' + 
                     "<a name=\"Click to call\" href=\"" + item.number_2+ "\">" + item.number_2 + '</td> </tr>'+ 
