@@ -1,0 +1,22 @@
+stages:
+  - test
+  - build
+
+test:
+  stage: test
+  image: python
+  services: 
+   - postgres:11
+  variables:
+   POSTGRES_DB: test_db
+   POSTGRES_USER: test_user
+   POSTGRES_PASSWORD: "test"
+   DJANGO_SECRET_KEY: "PIPELINE_SECRET_PLACEHOLDER"
+
+  script:
+  - apt-get update
+  - apt-get upgrade -qy
+  - apt-get install  -qy -f zlib1g-dev
+  - pip install -r requirements.txt
+  - python manage.py migrate
+  - python manage.py test
