@@ -59,6 +59,7 @@ def register_view(request):
         last_name = request.POST['last_name']
         username = request.POST['username']
         password = request.POST['password1']
+        age = request.POST['age']
         email= "placeholder@gmail.com"
         phone = request.POST['phone']
         print("phone: " + phone)
@@ -66,26 +67,26 @@ def register_view(request):
 
             print("pass too short")
             return render(request, 'register.html', {'pass_flag': True})
-        
-        try:
-            user = User.objects.create_user(
-                    username=username, 
-                    password=password,
-                    email=email,
-                    first_name= first_name,
-                    last_name=last_name,
-                
-                )
-            rescue = RescueTeam.create(user, phone, False)
+        else:
+            try:
+                user = User.objects.create_user(
+                        username=username, 
+                        password=password,
+                        email=email,
+                        first_name= first_name,
+                        last_name=last_name,
+                    
+                    )
+                rescue = RescueTeam.objects.create(user = user, phone = phone, valid =False, age = age)
 
-            rescue.save()
-            user.save()
-            print("user created\n")
-            auth.login(request, user)
-            return redirect("../reg_done")
-        except:
-            print("error")
-            return render(request, 'register.html', {'alert_flag': True})
+                rescue.save()
+                user.save()
+                print("user created\n")
+                auth.login(request, user)
+                return redirect("../reg_done")
+            except:
+                print("error")
+                return render(request, 'register.html', {'alert_flag': True})
           
       
 
