@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<style>
+    #rescue_me, #rescue_other, #watermark, #extra2, #extra1{
+      -webkit-transition: ease-in 400ms; /* Safari prior 6.1 */
+      transition: ease-in .2s;
+      border: 5px dotted black;
+    }
+
+    #rescue_me {
+      background-color: black;
+      color: green;
+      opacity: 0.6;
+
+    }
+
+    #rescue_other {
+      background-color: black;
+      opacity: 0.6;
+      color: orange;
+
+    }
+    #extra1{
+        color:blue;      
+        background-color: black;
+        opacity: 0.6;
+    }
+    #extra2{
+      color:violet;
+      background-color: black;
+      opacity: 0.6;
+    }
+    
+    #rescue_me:hover {
+      border: dotted red;
+      border-width: 7px;
+      opacity: 1;
+      margin-bottom: 15px;
+      margin-top: 15px;
+
+    }
+    #rescue_other:hover, #extra1:hover, #extra2:hover {
+      border: 3px dashed red;
+      opacity: 1;
+  
+
+    }
+
+    #rescue_other:hover, #extra1:hover, #extra2:hover{
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+    }
+
+
+    #watermark:hover {
+      color:blue;
+      margin:10px;
+      }
+      
+    @media screen and (max-width: 600px) {
+      #watermark {
+        display: none; visibility:hidden;
+        color:blue;
+        }
+    
+      #rescue_me {
+        font-size: 40px;
+      }
+      #rescue_other {
+        font-size: 20px;
+      }
+    }
+
+</style>
+
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-animate-zoom w3-text-white">
+
+  <div class="w3-display-middle">
+    <form method="POST">  {% csrf_token %}
+        <h1 class="w3-jumbo w3-animate-top w3-display-middle"><button type="submit" name="rescue_me" id="rescue_me" value="Rescue&Me">&nbsp;Rescue Me! </button></h1>
+        <hr class="w3-border-grey" style="margin:auto;width:40%">
+        
+        <p class="w3-large w3-center w3-animate-bottom"><button type="submit" name="rescue_other" id="rescue_other" value="Rescue Friend/Family">Rescue Friend/Family </button></p>
+        <p class="w3-large w3-center w3-animate-bottom"><button type="submit" name="extra1" id="extra1" value="extra1"><a href="https://www.protectyourhome.com/blog/home-safety-tips/home-safety-tips-for-natural-disasters" target="_blank" style="text-decoration: none;"> Safety Instructions</a></button></p>
+        <p class="w3-large w3-center w3-animate-bottom"><button type="submit" name="extra2" id="extra2" value="extra2"><a href="https://www.almanac.com/content/flood-safety-and-survival-tips" target="_blank" style="text-decoration: none;"> Survival Guide </a> </button></p>
+    </form> 
+  </div>
+
+</div>
+
+<div class="w3-display-bottomleft w3-padding-large" style="color:red;">
+ <a id="watermark" href="https://github.com/raksha-oss/SOS-API" target="_blank" style="text-decoration: none;"> Powered by S.O.S</a>
+</div>
+
+{% endblock body %}
+
+
