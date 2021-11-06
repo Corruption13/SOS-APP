@@ -14,8 +14,17 @@
         height: 100%;
         background-color: #301934;
     }
+    #watermark-bot{
+        color:rgb(177, 174, 174);
+        border-radius: 1em;
+        text-decoration: none;
+        padding: 10px;
+    }
+
+
     .bgimg {
-    background: black;
+    background: #f2f2f2;
+  
     min-height: 100%;
     background-position: center;
     background-size: cover;
@@ -28,7 +37,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: rgb(39, 39, 39);
     -webkit-transition: ease-in 400ms; /* Safari prior 6.1 */
     transition: .2s;
     }
@@ -54,8 +63,13 @@
     ul.topnav li.right {float: right;}
 
     @media screen and (max-width: 600px) {
-    ul.topnav li.right, 
-    ul.topnav li {display:none;}
+        #watermark-bot {
+        display: none; visibility:hidden;
+        color:blue;
+        }
+        ul.topnav li.right, ul.topnav li {
+            font-size: 0.9em;
+        }
     }
 
     {% block style %}
@@ -77,6 +91,11 @@
 {% block body %}
 
 {% endblock %}
+
+<div id="watermark-bot" class="w3-display-bottomleft w3-padding-large">
+    <a  href="https://github.com/raksha-oss/SOS-API"> Powered by S.O.S</a>
+  
+
 
 </div>
 

@@ -156,4 +156,4 @@ def map_select_2(request):
 
  
   
-    return render(request, "map_select2.html", {"jsonobj": data, "situation": data2, "user_id": request.user.first_name})
+    return render(request, "map_select2.html", {"jsonobj": data, "situation": data2})

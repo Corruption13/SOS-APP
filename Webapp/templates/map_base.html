@@ -13,7 +13,7 @@
       }
       /* Optional: Makes the sample page fill the window. */
       .form-control{
-        background-color: black; 
+        background-color: white; 
         color: red;
 
       }
@@ -22,7 +22,8 @@
         margin: 10px;
         margin-top: 0px;
         padding: 0;
-        background: black;
+        background: #f2f2f2;
+        color:black;
       }
       .gm{
         background-color:grey;
@@ -37,14 +38,14 @@
         padding: 0;
         overflow: hidden;
         background-color: #333;
-
+        color:white;
         }
 
         ul.topnav li {float: left;}
 
         ul.topnav li a {
         display: block;
-        color: white;
+        
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
@@ -57,19 +58,20 @@
         ul.topnav li.right {float: right;}
 
         @media screen and (max-width: 600px) {
-        ul.topnav li.right, 
-        ul.topnav li {float: none;}
-        #map {
-            height: 70%;
-          }
 
+        #map {
+            height: 20em;
+        }
+        ul.topnav li.right, ul.topnav li {
+            font-size: 0.9em;
+        }
 
         }
 
       
     </style>
   </head>
-  <body  class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <body  class="bgimg w3-display-container w3-animate-opacity">
 
 
 <ul class="topnav w3-animate-top">
@@ -83,7 +85,7 @@
 
 
   <div class="w3-animate-bottom">
-      <div id="panel" style="color: white; border: 10px solid black;">Choose your location</div>
+      <div id="panel">Choose your location</div>
       <div id="latclicked"></div>
       <div id="longclicked"></div>
 
